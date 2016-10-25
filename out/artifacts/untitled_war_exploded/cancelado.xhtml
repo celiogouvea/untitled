@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+    <title>ControProc</title>
+</h:head>
+<h:body>
+    <h:form>
+        <div id="content" class="left_content" style="height: 550px; border-radius: 3px;background-color:#4f94cd;">
+            <div style="margin:50px auto auto 10px;position: absolute;">
+                <p:menu toggleable="true">
+                    <p:submenu label="Propriedades">
+                        <p:menuitem value="Pessoa" url="#{uRL.pessoa}" icon="ui-icon-person"></p:menuitem>
+                        <p:menuitem value="Processo" url="#{uRL.processo}" icon="ui-icon-folder-open"/>
+                    </p:submenu>
+                    <p:submenu label="Tramitação">
+                        <p:menuitem value="Adandamento" url="#{uRL.andamento}" icon="ui-icon-transferthick-e-w"/>
+                        <p:menuitem value="Encerrado" url="#{uRL.cancelado}" icon="ui-icon-stop"/>
+                    </p:submenu>
+                </p:menu>
+            </div>
+            <p:messages closable="true"/><br/><br/>
+            <div style="margin: 0px 0px 0px 400px; position: absolute">
+                <p:dataTable value="#{relacionamentoController.listFI}" var="r" id="dataTable"
+                             style="width: 800px;">
+                    <p:column headerText="Funcionario" style="width: 300px;">
+                        <center>#{r.idContato}</center>
+                    </p:column>
+                    <p:column headerText="Nº Processo">
+                        <center>#{r.idProcesso}</center>
+                    </p:column>
+                    <p:column headerText="Localização">
+                        <center>#{r.localizacao}</center>
+                    </p:column>
+                </p:dataTable>
+            </div>
+        </div>
+    </h:form>
+</h:body>
+</html>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+<h:head><title>ControProc</title></h:head>
+<h:body>
+    <h:form id="form">
+
+
+        <div id="content" class="left_content" style="height: 300px; border-radius: 3px;background-color:#4f94cd;">
+            <div style="margin: 60px auto auto 10px;position: absolute;">
+                <p:menu toggleable="true">
+                    <p:submenu label="Propriedades">
+                        <p:menuitem value="Pessoa" url="#{uRL.pessoa}" icon="ui-icon-person"></p:menuitem>
+                        <p:menuitem value="Processo" url="#{uRL.processo}" icon="ui-icon-folder-open"/>
+                    </p:submenu>
+                    <p:submenu label="Tramitação">
+                        <p:menuitem value="Adandamento" url="#{uRL.andamento}" icon="ui-icon-transferthick-e-w"/>
+                        <p:menuitem value="Encerrado" url="#{uRL.cancelado}" icon="ui-icon-stop"/>
+                    </p:submenu>
+                </p:menu>
+            </div>
+            <p:messages closable="true"/><br/><br/>
+            <div style="margin: 0px 0px 0px 400px; position: absolute">
+                <center>
+                    <h2>
+                        <p:panelGrid columns="2" id="infoProcesso" style="border-radius: 5px;">
+                            <p:column>
+                                <p:outputLabel value="Numero :"/>
+                                <p:inputText value="#{processoController.processo.numero}"/>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="Descrição:"/>
+                                <p:inputText value="#{processoController.processo.objeto}"/>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="Data:"/>
+                                <p:calendar value="#{processoController.processo.data}" pattern="MM/dd/yyyy"/>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="Valor:"/>
+                                <p:inputMask mask="R$999.999.999,99" value="#{processoController.processo.valor}"/>
+                            </p:column>
+                        </p:panelGrid>
+                        <p:panelGrid>
+                                <p:commandButton value="Salvar" actionListener="#{processoController.save}"
+                                                 update="dataTable" process="form" id="insertContato" onclick="PF('dlg1').show();"/>
+                        </p:panelGrid>
+                    </h2>
+                </center>
+            </div>
+        </div>
+        <p:dataTable value="#{processoController.listProcesso}" var="cont" id="dataTable"
+                     style="color: red;">
+            <p:column headerText="Numero">
+                <center>#{cont.numero}</center>
+            </p:column>
+            <p:column headerText="Descrissão">
+                <center>#{cont.objeto}</center>
+            </p:column>
+            <p:column headerText="Data">
+                <center>#{cont.data.date}/#{cont.data.month+1}/#{cont.data.year+1900}</center>
+            </p:column>
+            <p:column headerText="Valor">
+                <center>#{cont.valor}</center>
+            </p:column>
+            <p:column>
+                <center><p:commandButton value="EDITAR" process="@this" actionListener="#{processoController.alterar(cont)}"
+                                         update="form:infoProcesso,form:insertContato"/></center>
+            </p:column>
+            <p:column>
+                <center>
+                    <p:commandButton value="DELETAR" update="@all" process="@this"
+                                     actionListener="#{processoController.delete(cont)}"/>
+                </center>
+            </p:column>
+        </p:dataTable>
+        <p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40">
+            <h:outputText value="Processo Salva Com Sucesso!!!!!!!!!" />
+        </p:dialog>
+    </h:form>
+</h:body>
+</html>

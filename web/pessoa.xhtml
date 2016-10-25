@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core" xmlns:p="http://primefaces.org/ui">
+<h:head><title>ControProc</title></h:head>
+<h:body>
+    <h:form id="form">
+
+
+        <div id="content" class="left_content" style="height: 300px; border-radius: 3px;background-color:#4f94cd;">
+            <div style="margin:50px auto auto 10px;position: absolute;">
+                <p:menu toggleable="true">
+                    <p:submenu label="Propriedades">
+                        <p:menuitem value="Pessoa" url="#{uRL.pessoa}" icon="ui-icon-person"></p:menuitem>
+                        <p:menuitem value="Processo" url="#{uRL.processo}" icon="ui-icon-folder-open"/>
+                    </p:submenu>
+                    <p:submenu label="Tramitação">
+                        <p:menuitem value="Adandamento" url="#{uRL.andamento}" icon="ui-icon-transferthick-e-w"/>
+                        <p:menuitem value="Encerrado" url="#{uRL.cancelado}" icon="ui-icon-stop"/>
+                    </p:submenu>
+                </p:menu>
+            </div>
+            <p:messages closable="true"/><br/><br/>
+            <div style="margin: 0px 0px 0px 400px; position: absolute" >
+                <center>
+                    <h2>
+                        <p:panelGrid columns="2" id="infoContato" style="border-radius: 5px;">
+                            <p:column>
+                                <p:outputLabel value="Nome :"/>
+                                <p:inputText value="#{contatoController.contato.nome}"/>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="Telefone:"/>
+                                <p:inputMask mask="(99)99999-9999"  value="#{contatoController.contato.telefone}"/>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="Email:"/>
+                                <p:inputText  value="#{contatoController.contato.email}"/>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="CPF:"/>
+                                <p:inputMask mask="999.999.999-99"  value="#{contatoController.contato.CPF}"/>
+                            </p:column>
+                            <p:column>
+                                <p:outputLabel value="Senha:"/>
+                                <p:password  value="#{contatoController.contato.senha}"/>
+                            </p:column>
+                        </p:panelGrid>
+                        <p:panelGrid>
+                                <p:commandButton value="Salvar" actionListener="#{contatoController.save}" update="dataTable"
+                                                 id="insertContato" process="form" onclick="PF('dlg1').show();"/>
+                        </p:panelGrid>
+                    </h2>
+                </center>
+            </div>
+        </div>
+        <p:dataTable value="#{contatoController.listContato}" var="cont" id="dataTable"
+                     style="border: #060606 3px;">
+            <p:column headerText="NOME">
+                <center>#{cont.nome}</center>
+            </p:column>
+            <p:column headerText="TELEFONE">
+                <center>#{cont.telefone}</center>
+            </p:column>
+            <p:column headerText="CPF">
+                <center>#{cont.CPF}</center>
+            </p:column>
+            <p:column headerText="EMAIL">
+                <center>#{cont.email}</center>
+            </p:column>
+            <p:column>
+                <center><p:commandButton value="EDITAR" process="@this" actionListener="#{contatoController.alterar(cont)}"
+                                         update="form:infoContato,form:insertContato"/></center>
+            </p:column>
+            <p:column>
+                <center>
+                    <p:commandButton value="DELETAR" update="@all" process="@this"
+                                     actionListener="#{contatoController.delete(cont)}"/>
+                </center>
+            </p:column>
+        </p:dataTable>
+        <p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40">
+            <h:outputText value="Pessoa Salva Com Sucesso!!!!!!!!!" />
+        </p:dialog>
+    </h:form>
+</h:body>
+</html>
