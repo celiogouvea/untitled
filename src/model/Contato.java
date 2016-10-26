@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by pdj_3 on 22/10/2016.
@@ -11,10 +12,14 @@ public class Contato {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @NotNull(message = "Campo Obrigatorio")
     private String Nome;
     private String Telefone;
     private String Email;
+
     private String Senha;
+    @NotNull(message = "Campo Obrigatorio")
     private String CPF;
 
 

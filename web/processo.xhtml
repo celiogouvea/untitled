@@ -9,7 +9,7 @@
 <h:body>
     <h:form id="form">
 
-
+        <p:panel id="panel">
         <div id="content" class="left_content" style="height: 300px; border-radius: 3px;background-color:#4f94cd;">
             <div style="margin: 60px auto auto 10px;position: absolute;">
                 <p:menu toggleable="true">
@@ -30,11 +30,15 @@
                         <p:panelGrid columns="2" id="infoProcesso" style="border-radius: 5px;">
                             <p:column>
                                 <p:outputLabel value="Numero :"/>
-                                <p:inputText value="#{processoController.processo.numero}"/>
+                                <p:inputText id="Numero" value="#{processoController.processo.numero}" required="true">
+                                    <p:ajax update="Numero"/>
+                                </p:inputText>
                             </p:column>
                             <p:column>
                                 <p:outputLabel value="Descrição:"/>
-                                <p:inputText value="#{processoController.processo.objeto}"/>
+                                <p:inputText id="Descricao" value="#{processoController.processo.objeto}" required="true">
+                                    <p:ajax update="Descricao"/>
+                                </p:inputText>
                             </p:column>
                             <p:column>
                                 <p:outputLabel value="Data:"/>
@@ -47,7 +51,7 @@
                         </p:panelGrid>
                         <p:panelGrid>
                                 <p:commandButton value="Salvar" actionListener="#{processoController.save}"
-                                                 update="dataTable" process="form" id="insertContato" onclick="PF('dlg1').show();"/>
+                                                 update="@all" process="form" id="insertContato"/>
                         </p:panelGrid>
                     </h2>
                 </center>
@@ -78,9 +82,7 @@
                 </center>
             </p:column>
         </p:dataTable>
-        <p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40">
-            <h:outputText value="Processo Salva Com Sucesso!!!!!!!!!" />
-        </p:dialog>
+        </p:panel>
     </h:form>
 </h:body>
 </html>

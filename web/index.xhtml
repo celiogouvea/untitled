@@ -14,8 +14,10 @@
    <h:form>
 
       <h:form>
+
          <center>
-         <div style="margin: 200px auto auto auto">
+         <div style="margin: 200px auto auto auto;widows:200">
+            <p:panel id="panel" header="Login">
             <div style="margin: auto auto 0px  auto">
                <p:panelGrid columns="2">
                   <p:outputLabel value="C.P.F:" />
@@ -25,13 +27,15 @@
                   <p:password value="#{controler.data}" />
                </p:panelGrid><br/>
                <p:panelGrid>
-                  <p:commandButton value="Logim" action="#{controler.login}"/>
+                  <p:commandButton value=" OK  " action="#{controler.login}"/>
                </p:panelGrid>
             </div>
             <div style="margin: auto 0px auto auto">
             </div>
+            </p:panel>
          </div>
          </center>
+
       </h:form>
    </h:form>
 </h:body>

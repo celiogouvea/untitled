@@ -58,7 +58,7 @@
                             </p:column>
                         </p:panelGrid>
 
-                    <p:commandButton value="Salvar" actionListener="#{relacionamentoController.save}" onclick="PF('dgl').show()"/>
+                    <p:commandButton value="Salvar" actionListener="#{relacionamentoController.save}" onclick="PF('dlg').show()"/>
                 </center>
                 <br/><br/><br/>
                 <center>
@@ -77,6 +77,12 @@
                 </center>
             </div>
         </div>
+        <p:dialog header="Basic Dialog" widgetVar="dlg">
+            <h:outputText value="#{relacionamentoController.relacionamento.situaca}" />
+            <h:outputText value="#{relacionamentoController.relacionamento.idContato}" />
+            <h:outputText value="#{relacionamentoController.relacionamento.idProcesso}" />
+            <h:outputText value="#{relacionamentoController.relacionamento.localizacao}" />
+        </p:dialog>
     </h:form>
 </h:body>
 </html>

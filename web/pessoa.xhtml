@@ -10,6 +10,7 @@
     <h:form id="form">
 
 
+        <p:panel id="panel">
         <div id="content" class="left_content" style="height: 300px; border-radius: 3px;background-color:#4f94cd;">
             <div style="margin:50px auto auto 10px;position: absolute;">
                 <p:menu toggleable="true">
@@ -30,8 +31,12 @@
                         <p:panelGrid columns="2" id="infoContato" style="border-radius: 5px;">
                             <p:column>
                                 <p:outputLabel value="Nome :"/>
-                                <p:inputText value="#{contatoController.contato.nome}"/>
+                                <p:inputText id="Nome" value="#{contatoController.contato.nome}" required="true"
+                                             label="Campo Obrigatorio">
+                                    <p:ajax update="Nome" />
+                                </p:inputText>
                             </p:column>
+
                             <p:column>
                                 <p:outputLabel value="Telefone:"/>
                                 <p:inputMask mask="(99)99999-9999"  value="#{contatoController.contato.telefone}"/>
@@ -42,7 +47,10 @@
                             </p:column>
                             <p:column>
                                 <p:outputLabel value="CPF:"/>
-                                <p:inputMask mask="999.999.999-99"  value="#{contatoController.contato.CPF}"/>
+                                <p:inputMask id="CPF" required="true" mask="999.999.999-99"
+                                             value="#{contatoController.contato.CPF}">
+                                    <p:ajax update="CPF" />
+                                </p:inputMask>
                             </p:column>
                             <p:column>
                                 <p:outputLabel value="Senha:"/>
@@ -50,13 +58,14 @@
                             </p:column>
                         </p:panelGrid>
                         <p:panelGrid>
-                                <p:commandButton value="Salvar" actionListener="#{contatoController.save}" update="dataTable"
-                                                 id="insertContato" process="form" onclick="PF('dlg1').show();"/>
+                                <p:commandButton value="Salvar" actionListener="#{contatoController.save}" update="@all"
+                                                 id="insertContato" process="form"/>
                         </p:panelGrid>
                     </h2>
                 </center>
             </div>
         </div>
+
         <p:dataTable value="#{contatoController.listContato}" var="cont" id="dataTable"
                      style="border: #060606 3px;">
             <p:column headerText="NOME">
@@ -82,9 +91,7 @@
                 </center>
             </p:column>
         </p:dataTable>
-        <p:dialog header="Basic Dialog" widgetVar="dlg1" minHeight="40">
-            <h:outputText value="Pessoa Salva Com Sucesso!!!!!!!!!" />
-        </p:dialog>
+        </p:panel>
     </h:form>
 </h:body>
 </html>

@@ -5,6 +5,7 @@ import model.Contato;
 import model.Processo;
 import model.Relacionamento;
 
+import javax.faces.bean.ManagedBean;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.List;
 /**
  * Created by pdj_3 on 23/10/2016.
  */
+@ManagedBean(name="RelacionamentoDAO", eager = true)
 public class RelacionamentoDAO {
     private static EntityManager em;
 
@@ -46,5 +48,9 @@ public class RelacionamentoDAO {
         return query.getResultList();
     }
 
+    public List<Relacionamento> getTheme(){
+        Query query = getEm().createQuery("select p from Relacionamento p order by p.id");
+        return query.getResultList();
+    }
 
 }
